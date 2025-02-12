@@ -14,7 +14,7 @@ basics, while some of you will push on into the stratosphere!
 
 ---
 
-## Stage 1
+## Stage 1 [Complete]
 
 Using classes, ArrayLists and methods, create a deck of Cards. You should use the following
 classes:
