@@ -1,4 +1,7 @@
+import java.util.Comparator;
+
 public class Card {
+    public static Comparator<? super Card> ValueComparator;
     private String suit;
     private String symbol;
     private int value;

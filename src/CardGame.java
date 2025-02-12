@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class CardGame {
     public ArrayList<Card> deckOfCards;
@@ -37,7 +38,13 @@ public class CardGame {
         return topCard;
     }
 
-    public void shuffleDeck(){
+    public ArrayList<Card> sortDeckInNumberOrder() {
+        deckOfCards.sort(Comparator.comparing(Card::getValue));
+        return deckOfCards;
+    }
+
+    public ArrayList<Card> shuffleDeck(){
         Collections.shuffle(deckOfCards);
+        return deckOfCards;
     }
 }
