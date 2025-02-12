@@ -25,4 +25,15 @@ public class CardGame {
             System.out.println(card);
         }
     }
+
+    public Card dealCard(){
+        if (deckOfCards.isEmpty()) {
+            throw new IllegalStateException("No cards left in the deck");
+        }
+        Card topCard = deckOfCards.getFirst();
+        System.out.println(topCard);
+        deckOfCards.removeFirst();
+        return topCard;
+    }
+
 }
