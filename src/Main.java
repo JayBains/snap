@@ -6,6 +6,8 @@ public class Main {
         newGame.listDeck();
         newGame.sortDeckInNumberOrder();
         newGame.listDeck();
+        newGame.sortDeckIntoSuits();
+        newGame.listDeck();
         newGame.dealCard();
     }
 }

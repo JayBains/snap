@@ -43,6 +43,11 @@ public class CardGame {
         return deckOfCards;
     }
 
+    public ArrayList<Card> sortDeckIntoSuits() {
+        deckOfCards.sort(Comparator.comparing(Card::getSuit));
+        return deckOfCards;
+    }
+
     public ArrayList<Card> shuffleDeck(){
         Collections.shuffle(deckOfCards);
         return deckOfCards;
