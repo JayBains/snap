@@ -34,7 +34,7 @@ classes:
 
 ---
 
-## Stage 2
+## Stage 2 [Complete]
 
 Lets get some core functionality to our CardGame by implementing the following methods:
 
