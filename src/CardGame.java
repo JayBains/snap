@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CardGame {
     public ArrayList<Card> deckOfCards;
@@ -36,4 +37,7 @@ public class CardGame {
         return topCard;
     }
 
+    public void shuffleDeck(){
+        Collections.shuffle(deckOfCards);
+    }
 }
