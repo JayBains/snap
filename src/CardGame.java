@@ -4,9 +4,11 @@ import java.util.Comparator;
 
 public class CardGame {
     public ArrayList<Card> deckOfCards;
+    String name;
 
-    public CardGame() {
+    public CardGame(String name) {
         this.deckOfCards = new ArrayList<>();
+        this.name = name;
         createDeck();
     }
 

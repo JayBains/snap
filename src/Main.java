@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        CardGame newGame = new CardGame();
+        Snap newGame = new Snap("Jay's snap");
         System.out.println(newGame.getDeck());
         newGame.shuffleDeck();
         System.out.println(newGame.getDeck());
