@@ -1,13 +1,20 @@
 public class Main {
     public static void main(String[] args) {
         CardGame newGame = new CardGame();
-        newGame.listDeck();
+        System.out.println(newGame.getDeck());
         newGame.shuffleDeck();
-        newGame.listDeck();
+        System.out.println(newGame.getDeck());
         newGame.sortDeckInNumberOrder();
-        newGame.listDeck();
+        System.out.println(newGame.getDeck());
         newGame.sortDeckIntoSuits();
-        newGame.listDeck();
+        System.out.println(newGame.getDeck());
+        newGame.shuffleDeck();
+        System.out.println(newGame.getDeck());
         newGame.dealCard();
+        newGame.dealCard();
+        newGame.dealCard();
+        newGame.dealCard();
+        newGame.dealCard();
+        System.out.println(newGame.getDeck());
     }
 }

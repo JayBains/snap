@@ -22,34 +22,29 @@ public class CardGame {
         }
     }
 
-    public void listDeck(){
-        for (Card card : deckOfCards){
-            System.out.println(card);
-        }
+    public ArrayList<Card> getDeck(){
+//        deckOfCards.forEach(System.out::println);
+        return deckOfCards;
     }
 
     public Card dealCard(){
         if (deckOfCards.isEmpty()) {
             throw new IllegalStateException("No cards left in the deck");
         }
-        Card topCard = deckOfCards.getFirst();
-        System.out.println(topCard);
+        System.out.println(deckOfCards.getFirst());
         deckOfCards.removeFirst();
-        return topCard;
+        return deckOfCards.getFirst();
     }
 
-    public ArrayList<Card> sortDeckInNumberOrder() {
+    public void sortDeckInNumberOrder() {
         deckOfCards.sort(Comparator.comparing(Card::getValue));
-        return deckOfCards;
     }
 
-    public ArrayList<Card> sortDeckIntoSuits() {
+    public void sortDeckIntoSuits() {
         deckOfCards.sort(Comparator.comparing(Card::getSuit));
-        return deckOfCards;
     }
 
-    public ArrayList<Card> shuffleDeck(){
+    public void shuffleDeck(){
         Collections.shuffle(deckOfCards);
-        return deckOfCards;
     }
 }
