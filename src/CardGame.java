@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 public class CardGame {
     public ArrayList<Card> deckOfCards;
@@ -25,17 +26,15 @@ public class CardGame {
     }
 
     public ArrayList<Card> getDeck(){
-//        deckOfCards.forEach(System.out::println);
         return deckOfCards;
     }
 
     public Card dealCard(){
-        if (deckOfCards.isEmpty()) {
-            throw new IllegalStateException("No cards left in the deck");
+        if (deckOfCards.isEmpty()){
+            throw new NoSuchElementException("No cards left in the deck");
         }
         System.out.println(deckOfCards.getFirst());
-        deckOfCards.removeFirst();
-        return deckOfCards.getFirst();
+        return deckOfCards.removeFirst();
     }
 
     public void sortDeckInNumberOrder() {
