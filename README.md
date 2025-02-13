@@ -56,7 +56,7 @@ Shuffles the deck into a random order and stores the new shuffled deck back into
 
 ---
 
-### Stage 3
+### Stage 3 [Complete]
 
 Create class for Snap that extends CardGame.
 
