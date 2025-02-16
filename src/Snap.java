@@ -11,12 +11,11 @@ public class Snap extends CardGame{
     Player playerOne = new Player();
     Player playerTwo = new Player();
 
-    private boolean gameOver = false;
     private String previousCardSymbol = null;
-    private int playerTurn = 1;
+    private boolean gameOver = false;
+    private boolean isPlayerOneTurn = true;
 
     public void playGame(){
-        Scanner scannerObj = new Scanner(System.in);
         int playerCount;
 
         System.out.println("How many players are playing? (1 or 2)");
@@ -54,41 +53,22 @@ public class Snap extends CardGame{
     }
 
     private void twoPlayer() {
-        getPlayerName();
+        inputPlayerName();
         System.out.println(playerOne.getName() + " verses " + playerTwo.getName() + ".");
         System.out.println(playerOne.getName() + "'s turn. Press enter key to draw a card.");
 
         while (!gameOver) {
             try {
-                scannerObj.nextLine();
-                Card currentCard = dealCard();
-
-                if (Objects.equals(currentCard.getSymbol(), previousCardSymbol)) {
-                    if (playerTurn == 1) {
-                        System.out.println("SNAP! " + playerOne.getName() + " wins.");
-                    } else {
-                        System.out.println("SNAP! " + playerTwo.getName() + " wins.");
-                    }
-                    gameOver = true;
-                } else {
-                    previousCardSymbol = currentCard.getSymbol();
-                }
+                symbolMatch();
             } catch (NoSuchElementException e) {
                 System.out.println(e.getMessage());
                 gameOver = true;
             }
-
-            if (!gameOver && playerTurn == 1){
-                System.out.println(playerTwo.getName() + "'s turn.");
-                playerTurn++;
-            } else if (!gameOver && playerTurn == 2){
-                System.out.println(playerOne.getName() + "'s turn.");
-                playerTurn--;
-            }
+            setPlayerTurn();
         }
     }
 
-    private void getPlayerName(){
+    private void inputPlayerName(){
         System.out.println("Player One please enter name: ");
         do {
             playerOne.setName(scannerObj.nextLine());
@@ -98,5 +78,33 @@ public class Snap extends CardGame{
         do {
             playerTwo.setName(scannerObj.nextLine());
         } while(playerTwo.getName().isEmpty());
+    }
+
+    private void symbolMatch(){
+        scannerObj.nextLine();
+        Card currentCard = dealCard();
+
+        if (Objects.equals(currentCard.getSymbol(), previousCardSymbol)) {
+            System.out.println("Symbols match! Type 'SNAP' to win.");
+            String quickTimeEvent = scannerObj.nextLine().toLowerCase();
+            if (!quickTimeEvent.equals("snap")) {
+                System.out.println("Incorrect");
+            } else {
+                System.out.println("SNAP! " + (isPlayerOneTurn ? playerOne.getName() : playerTwo.getName()) + " wins.");
+                gameOver = true;
+            }
+        } else {
+            previousCardSymbol = currentCard.getSymbol();
+        }
+    }
+
+    private void setPlayerTurn(){
+        if (!gameOver && isPlayerOneTurn){
+            System.out.println(playerTwo.getName() + "'s turn.");
+            isPlayerOneTurn = false;
+        } else if (!gameOver){
+            System.out.println(playerOne.getName() + "'s turn.");
+            isPlayerOneTurn = true;
+        }
     }
 }
