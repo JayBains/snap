@@ -16,17 +16,17 @@ public class Snap extends CardGame{
     private boolean isPlayerOneTurn = true;
 
     public void playGame(){
-        int playerCount;
+        String playerCount;
 
         System.out.println("How many players are playing? (1 or 2)");
         do {
-            playerCount = scannerObj.nextInt();
-            if (playerCount != 1 && playerCount != 2) {
+            playerCount = scannerObj.nextLine();
+            if (!Objects.equals(playerCount, "1") && !Objects.equals(playerCount, "2")) {
                 System.out.println("Please enter a valid number of players (1 or 2)");
             }
-        } while (playerCount != 1 && playerCount != 2);
+        } while (!Objects.equals(playerCount, "1") && !Objects.equals(playerCount, "2"));
 
-        if (playerCount == 1) {
+        if (playerCount.equals("1")) {
             singlePlayer();
         } else {
             twoPlayer();
@@ -59,12 +59,12 @@ public class Snap extends CardGame{
 
         while (!gameOver) {
             try {
-                symbolMatch();
+                playTurn();
             } catch (NoSuchElementException e) {
                 System.out.println(e.getMessage());
                 gameOver = true;
             }
-            setPlayerTurn();
+            nextPlayerTurn();
         }
     }
 
@@ -80,7 +80,7 @@ public class Snap extends CardGame{
         } while(playerTwo.getName().isEmpty());
     }
 
-    private void symbolMatch(){
+    private void playTurn(){
         scannerObj.nextLine();
         Card currentCard = dealCard();
 
@@ -98,7 +98,7 @@ public class Snap extends CardGame{
         }
     }
 
-    private void setPlayerTurn(){
+    private void nextPlayerTurn(){
         if (!gameOver && isPlayerOneTurn){
             System.out.println(playerTwo.getName() + "'s turn.");
             isPlayerOneTurn = false;
