@@ -14,12 +14,19 @@ public class Snap extends CardGame{
         Scanner scannerObj = new Scanner(System.in);
         String previousCardSymbol = null;
         boolean gameOver = false;
+        int playerCount;
         int playerTurn = 1;
 
         System.out.println("How many players are playing? (1 or 2)");
-        int input = Integer.parseInt(scannerObj.nextLine());
 
-        if (input == 1) {
+        do {
+            playerCount = scannerObj.nextInt();
+            if (playerCount != 1 && playerCount != 2) {
+                System.out.println("Please enter a valid number of players (1 or 2)");
+            }
+        } while (playerCount != 1 && playerCount != 2);
+
+        if (playerCount == 1) {
 
             System.out.println("Game started. Press enter key to draw a card.");
             while (!gameOver) {
@@ -38,17 +45,20 @@ public class Snap extends CardGame{
                 }
             }
 
-        } else if (input == 2){
+        } else {
 
             System.out.println("Player One please enter name: ");
-            playerOne.setName(scannerObj.nextLine());
+            do {
+                playerOne.setName(scannerObj.nextLine());
+            } while(playerOne.getName().isEmpty());
 
             System.out.println("Player Two please enter name: ");
-            playerTwo.setName(scannerObj.nextLine());
+            do {
+                playerTwo.setName(scannerObj.nextLine());
+            } while(playerTwo.getName().isEmpty());
 
             System.out.println(playerOne.getName() + " verses " + playerTwo.getName() + ".");
-            System.out.println("Game started. Press enter key to draw a card.");
-            System.out.println(playerOne.getName() + "'s turn.");
+            System.out.println(playerOne.getName() + "'s turn. Press enter key to draw a card.");
 
             while (!gameOver) {
                 try {
@@ -70,10 +80,10 @@ public class Snap extends CardGame{
                     gameOver = true;
                 }
 
-                if (playerTurn == 1){
+                if (!gameOver && playerTurn == 1){
                     System.out.println(playerTwo.getName() + "'s turn.");
                     playerTurn++;
-                } else {
+                } else if (!gameOver && playerTurn == 2){
                     System.out.println(playerOne.getName() + "'s turn.");
                     playerTurn--;
                 }
