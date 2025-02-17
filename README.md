@@ -70,7 +70,7 @@ following rules:
 
 ---
 
-## Stage 4
+## Stage 4 [Complete]
 
 Create a Player class and enable the snap game to be two player, with the users taking it in turns to go. If the snap occurs on the users turn, they win.
 
