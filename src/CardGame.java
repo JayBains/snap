@@ -11,9 +11,11 @@ public class CardGame {
         this.deckOfCards = new ArrayList<>();
         this.name = name;
         createDeck();
+        shuffleDeck();
     }
 
     private void createDeck(){
+        deckOfCards.clear();
         String[] symbols = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
         String[] suits = {"♥", "♣", "♦", "♠"};
         int[] values = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
@@ -31,7 +33,7 @@ public class CardGame {
 
     public Card dealCard(){
         if (deckOfCards.isEmpty()){
-            throw new NoSuchElementException("No cards left in the deck");
+            throw new NoSuchElementException("No cards left in the deck.");
         }
         System.out.println(deckOfCards.getFirst() + "\n");
         return deckOfCards.removeFirst();
@@ -47,5 +49,10 @@ public class CardGame {
 
     public void shuffleDeck(){
         Collections.shuffle(deckOfCards);
+    }
+
+    public void remakeDeck(){
+        createDeck();
+        shuffleDeck();
     }
 }
