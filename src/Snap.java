@@ -9,7 +9,7 @@ public class Snap extends CardGame{
     Scanner scannerObj = new Scanner(System.in);
     Player playerOne = new Player();
     Player playerTwo = new Player();
-
+    Card currentCard;
     private String previousCardSymbol = null;
     private boolean gameOver = false;
     private boolean isPlayerOneTurn = true;
@@ -35,17 +35,10 @@ public class Snap extends CardGame{
         System.out.println("Game started. Press enter key to draw a card.");
         while (!gameOver) {
             try {
-                scannerObj.nextLine();
-                Card currentCard = dealCard();
-                if (currentCard.getSymbol().equals(previousCardSymbol)){
-                    System.out.println("SNAP!");
-                    gameOver = true;
-                } else {
-                    previousCardSymbol = currentCard.getSymbol();
-                }
+                playTurn();
             } catch(NoSuchElementException e) {
                 System.out.println(e.getMessage());
-                gameOver = true;
+                restartGame();
             }
         }
     }
@@ -59,7 +52,7 @@ public class Snap extends CardGame{
                 playTurn();
             } catch (NoSuchElementException e) {
                 System.out.println(e.getMessage());
-                gameOver = true;
+                restartGame();
             }
             nextPlayerTurn();
         }
@@ -79,15 +72,14 @@ public class Snap extends CardGame{
 
     private void playTurn(){
         scannerObj.nextLine();
-        Card currentCard = dealCard();
+        currentCard = dealCard();
 
         if (currentCard.getSymbol().equals(previousCardSymbol)) {
             double timer = System.currentTimeMillis();
             System.out.println("Symbols match! Type 'SNAP' to win.");
             String quickTimeEvent = scannerObj.nextLine().toLowerCase().trim();
             if (quickTimeEvent.equals("snap") && (System.currentTimeMillis() - timer) < 2000) {
-                System.out.println("SNAP! " + (isPlayerOneTurn ? playerOne.getName() : playerTwo.getName()) + " wins.");
-                gameOver = true;
+                turnWin();
             } else if (!quickTimeEvent.equals("snap") && (System.currentTimeMillis() - timer) < 2000){
                 System.out.println("Incorrect!");
             } else {
@@ -95,6 +87,18 @@ public class Snap extends CardGame{
             }
         } else {
             previousCardSymbol = currentCard.getSymbol();
+        }
+    }
+
+    private void turnWin(){
+        if (isPlayerOneTurn){
+            System.out.println("SNAP! " + playerOne.getName() + " You win.");
+            playerOne.addScore();
+            restartGame();
+        } else {
+            System.out.println("SNAP! " + playerTwo.getName() + " You win.");
+            playerTwo.addScore();
+            restartGame();
         }
     }
 
@@ -106,5 +110,21 @@ public class Snap extends CardGame{
             System.out.println(playerOne.getName() + "'s turn.");
             isPlayerOneTurn = true;
         }
+    }
+
+    private void restartGame() {
+        String inputL;
+        do {
+            System.out.println("Would you like to play again? Y/N");
+            inputL = scannerObj.nextLine().toLowerCase().trim();
+            if (inputL.equals("y")) {
+                remakeDeck();
+            } else if (inputL.equals("n")) {
+                System.out.println("Thank you for playing! \nFinal score: " + playerOne.getScore() + " - " + playerTwo.getScore());
+                gameOver = true;
+            } else {
+                System.out.println("Please enter a valid answer.");
+            }
+        } while (!inputL.equals("n") && !inputL.equals("y"));
     }
 }
