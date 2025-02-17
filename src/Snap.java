@@ -10,15 +10,15 @@ public class Snap extends CardGame{
     Player playerOne = new Player();
     Player playerTwo = new Player();
     Card currentCard;
+    private String playerCount;
     private String previousCardSymbol = null;
     private boolean isGameOver = false;
     private boolean isPlayerOneTurn = true;
 
     public void playGame(){
-        String playerCount;
         System.out.println("How many players are playing? (1 or 2)");
         do {
-            playerCount = scannerObj.nextLine();
+            playerCount = scannerObj.nextLine().trim();
             if (!playerCount.equals("1") && !playerCount.equals("2")) {
                 System.out.println("Please enter a valid number of players (1 or 2)");
             }
@@ -74,6 +74,7 @@ public class Snap extends CardGame{
         scannerObj.nextLine();
         currentCard = dealCard();
 
+        printCard();
         if (currentCard.getSymbol().equals(previousCardSymbol)) {
             double timer = System.currentTimeMillis();
             System.out.println("Symbols match! Type 'SNAP' to win.");
@@ -87,6 +88,16 @@ public class Snap extends CardGame{
             }
         } else {
             previousCardSymbol = currentCard.getSymbol();
+        }
+    }
+
+    private void printCard() {
+        if (isPlayerOneTurn && playerCount.equals("2")) {
+            System.out.println(currentCard + " drawn by " + playerOne.getName());
+        } else if (!isPlayerOneTurn) {
+            System.out.println(currentCard + " drawn by " + playerTwo.getName());
+        } else {
+            System.out.println(currentCard);
         }
     }
 
@@ -104,10 +115,8 @@ public class Snap extends CardGame{
 
     private void changePlayerTurn(){
         if (!isGameOver && isPlayerOneTurn){
-            System.out.println(playerTwo.getName() + "'s turn.");
             isPlayerOneTurn = false;
         } else if (!isGameOver){
-            System.out.println(playerOne.getName() + "'s turn.");
             isPlayerOneTurn = true;
         }
     }
@@ -119,6 +128,8 @@ public class Snap extends CardGame{
             inputToRestart = scannerObj.nextLine().toLowerCase().trim();
             if (inputToRestart.equals("y")) {
                 remakeDeck();
+                isPlayerOneTurn = true;
+                System.out.println(playerOne.getName() + " Press enter to draw a card");
             } else if (inputToRestart.equals("n")) {
                 System.out.println("Thank you for playing! \nFinal score: " + playerOne.getScore() + " - " + playerTwo.getScore());
                 isGameOver = true;

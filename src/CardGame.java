@@ -35,7 +35,6 @@ public class CardGame {
         if (deckOfCards.isEmpty()){
             throw new NoSuchElementException("No cards left in the deck.");
         }
-        System.out.println(deckOfCards.getFirst() + "\n");
         return deckOfCards.removeFirst();
     }
 
