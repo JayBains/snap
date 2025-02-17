@@ -1,5 +1,4 @@
 import java.util.NoSuchElementException;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Snap extends CardGame{
@@ -17,14 +16,13 @@ public class Snap extends CardGame{
 
     public void playGame(){
         String playerCount;
-
         System.out.println("How many players are playing? (1 or 2)");
         do {
             playerCount = scannerObj.nextLine();
-            if (!Objects.equals(playerCount, "1") && !Objects.equals(playerCount, "2")) {
+            if (!playerCount.equals("1") && !playerCount.equals("2")) {
                 System.out.println("Please enter a valid number of players (1 or 2)");
             }
-        } while (!Objects.equals(playerCount, "1") && !Objects.equals(playerCount, "2"));
+        } while (!playerCount.equals("1") && !playerCount.equals("2"));
 
         if (playerCount.equals("1")) {
             singlePlayer();
@@ -39,7 +37,7 @@ public class Snap extends CardGame{
             try {
                 scannerObj.nextLine();
                 Card currentCard = dealCard();
-                if (Objects.equals(currentCard.getSymbol(), previousCardSymbol)){
+                if (currentCard.getSymbol().equals(previousCardSymbol)){
                     System.out.println("SNAP!");
                     gameOver = true;
                 } else {
@@ -56,7 +54,6 @@ public class Snap extends CardGame{
         inputPlayerName();
         System.out.println(playerOne.getName() + " verses " + playerTwo.getName() + ".");
         System.out.println(playerOne.getName() + "'s turn. Press enter key to draw a card.");
-
         while (!gameOver) {
             try {
                 playTurn();
@@ -84,14 +81,14 @@ public class Snap extends CardGame{
         scannerObj.nextLine();
         Card currentCard = dealCard();
 
-        if (Objects.equals(currentCard.getSymbol(), previousCardSymbol)) {
+        if (currentCard.getSymbol().equals(previousCardSymbol)) {
             System.out.println("Symbols match! Type 'SNAP' to win.");
             String quickTimeEvent = scannerObj.nextLine().toLowerCase();
-            if (!quickTimeEvent.equals("snap")) {
-                System.out.println("Incorrect");
-            } else {
+            if (quickTimeEvent.equals("snap")) {
                 System.out.println("SNAP! " + (isPlayerOneTurn ? playerOne.getName() : playerTwo.getName()) + " wins.");
                 gameOver = true;
+            } else {
+                System.out.println("Incorrect");
             }
         } else {
             previousCardSymbol = currentCard.getSymbol();
