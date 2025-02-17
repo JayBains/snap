@@ -82,13 +82,16 @@ public class Snap extends CardGame{
         Card currentCard = dealCard();
 
         if (currentCard.getSymbol().equals(previousCardSymbol)) {
+            double timer = System.currentTimeMillis();
             System.out.println("Symbols match! Type 'SNAP' to win.");
-            String quickTimeEvent = scannerObj.nextLine().toLowerCase();
-            if (quickTimeEvent.equals("snap")) {
+            String quickTimeEvent = scannerObj.nextLine().toLowerCase().trim();
+            if (quickTimeEvent.equals("snap") && (System.currentTimeMillis() - timer) < 2000) {
                 System.out.println("SNAP! " + (isPlayerOneTurn ? playerOne.getName() : playerTwo.getName()) + " wins.");
                 gameOver = true;
+            } else if (!quickTimeEvent.equals("snap") && (System.currentTimeMillis() - timer) < 2000){
+                System.out.println("Incorrect!");
             } else {
-                System.out.println("Incorrect");
+                System.out.println("Too slow!");
             }
         } else {
             previousCardSymbol = currentCard.getSymbol();
