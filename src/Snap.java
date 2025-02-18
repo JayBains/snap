@@ -133,23 +133,22 @@ public class Snap extends CardGame{
     }
 
     private void restartGame() {
-        String inputToRestart;
+        System.out.println("Would you like to play again? Y/N");
+
         do {
-            System.out.println("Would you like to play again? Y/N");
-            inputToRestart = scannerObj.nextLine().toLowerCase().trim();
-
-            if (inputToRestart.equals("y")) {
-                remakeDeck();
-                isPlayerOneTurn = true;
-                System.out.println(playerOne.getName() + " Press enter to draw a card");
-                return;
-            } else if (inputToRestart.equals("n")) {
-                System.out.println("Thank you for playing! Final score: " + playerOne.getScore() + " - " + playerTwo.getScore());
-                isGameOver = true;
-                return;
+            switch (scannerObj.nextLine().toLowerCase().trim()){
+                case "y":
+                    remakeDeck();
+                    isPlayerOneTurn = true;
+                    System.out.println(playerOne.getName() + " Press enter to draw a card");
+                    return;
+                case "n":
+                    System.out.println("Thank you for playing! Final score: " + playerOne.getScore() + " - " + playerTwo.getScore());
+                    isGameOver = true;
+                    return;
+                default:
+                    System.out.println("Please enter a valid answer. Play again, Y or N ?");
             }
-
-            System.out.println("Please enter a valid answer.");
         } while (true);
     }
 }
