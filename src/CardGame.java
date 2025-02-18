@@ -16,11 +16,10 @@ public class CardGame {
 
     private void createDeck(){
         deckOfCards.clear();
-        String[] suits = {"♥", "♣", "♦", "♠"};
 
-        for (String suit : suits) {
+        for (Suit suits : Suit.values()) {
             for (Symbol symbols : Symbol.values()){
-                deckOfCards.add(new Card(suit, symbols.getSymbol(), symbols.getValue()));
+                deckOfCards.add(new Card(suits.getSuit(), symbols.getSymbol(), symbols.getValue()));
             }
         }
     }
