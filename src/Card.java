@@ -25,4 +25,5 @@ public class Card {
     public String toString() {
         return symbol + " of " + suit;
     }
+    // Change the string representation of the Card object
 }
