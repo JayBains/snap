@@ -28,11 +28,11 @@ Snap is a classic card game where **two players take turns drawing cards** until
    git clone https://github.com/JayBains/snap.git
    ```
    
-2. Open the game folder using an IDE.
+2. Open the game folder using IntelliJ Comunity Edition.
 
 3. Click the "Setup SDK" prompt on top right of IDE.
 
-4. Right click on Main.java and choose "Main.main()".
+4. Right click on Main.java and choose Run "Main.main()".
     
 ## 🎲 **How to Play**
 - The game will prompt you to choose between single-player or multiplayer mode.
